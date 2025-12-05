@@ -1,0 +1,29 @@
+{
+  "routes": [
+    {
+      "route": "/api/*",
+      "allowedRoles": ["authenticated", "anonymous"]
+    },
+    {
+      "route": "/assets/*",
+      "allowedRoles": ["authenticated", "anonymous"]
+    },
+    {
+      "route": "/*",
+      "rewrite": "/index.html"
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/images/*.{png,jpg,gif}", "/css/*", "/assets/*"]
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/index.html",
+      "statusCode": 200
+    }
+  },
+  "globalHeaders": {
+    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://login.microsoftonline.com https://docs.opencv.org https://*.opencv.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: http: https: blob:; connect-src 'self' http://localhost:3001 http://localhost:8080 https://aiva-backend-prod-app.azurewebsites.net https://*.azurewebsites.net https://*.staticwebapps.net https://login.microsoftonline.com https://graph.microsoft.com https://*.openai.azure.com data: blob:; frame-src 'self' https://login.microsoftonline.com"
+  }
+}
